@@ -35,5 +35,7 @@
         <item>HARDWARE=stingray,265.4378</item>
         <!-- Volantis -->
         <item>HARDWARE=flounder,272.0</item>
+        <!-- Zinwa Q25 -->
+        <item>MODEL=Q25,221.5</item>
     </string-array>
 </resources>

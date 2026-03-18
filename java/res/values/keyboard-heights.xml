@@ -33,5 +33,7 @@
     <!-- Preferable keyboard height in absolute scale: 48.0mm -->
         <!-- Xoom -->
         <item>HARDWARE=stingray,283.1337</item>
+        <!-- Zinwa Q25 -->
+        <item>MODEL=Q25,243.7</item>
     </string-array>
 </resources>

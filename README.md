@@ -1,5 +1,7 @@
 # FUTO Keyboard
 
+This fork repackages FUTO Keyboard as a `Zinwa Q25`-specific build with a separate Android application ID and square-screen sizing adjustments for the `720x720` Q25 display.
+
 The goal is to make a good modern keyboard that stays offline and doesn't spy on you. This keyboard is a fork of [LatinIME, The Android Open-Source Keyboard](https://android.googlesource.com/platform/packages/inputmethods/LatinIME), with significant changes made to it.
 
 Check out the [FUTO Keyboard website](https://keyboard.futo.org/) for downloads and more information.

@@ -215,16 +215,8 @@ public final class ResourceUtils {
         } else {
             keyboardHeight = Float.parseFloat(keyboardHeightInDp) * dm.density;
         }
-        final float maxKeyboardHeight = res.getFraction(
-                R.fraction.config_max_keyboard_height, dm.heightPixels, dm.heightPixels);
-        float minKeyboardHeight = res.getFraction(
-                R.fraction.config_min_keyboard_height, dm.heightPixels, dm.heightPixels);
-        if (minKeyboardHeight < 0.0f) {
-            // Specified fraction was negative, so it should be calculated against display
-            // width.
-            minKeyboardHeight = -res.getFraction(
-                    R.fraction.config_min_keyboard_height, dm.widthPixels, dm.widthPixels);
-        }
+        final float maxKeyboardHeight = getMaxKeyboardHeight(res, dm);
+        final float minKeyboardHeight = getMinKeyboardHeight(res, dm);
         // Keyboard height will not exceed maxKeyboardHeight and will not be less than
         // minKeyboardHeight.
         return (int)Math.max(Math.min(keyboardHeight, maxKeyboardHeight), minKeyboardHeight);
@@ -232,9 +224,31 @@ public final class ResourceUtils {
 
     public static int clampKeyboardHeight(final Resources res, final int height) {
         final DisplayMetrics dm = res.getDisplayMetrics();
+        final float maxKeyboardHeight = getMaxKeyboardHeight(res, dm);
+        final float minKeyboardHeight = getMinKeyboardHeight(res, dm);
+        // Keyboard height will not exceed maxKeyboardHeight and will not be less than
+        // minKeyboardHeight.
+        return (int)Math.max(Math.min(height, maxKeyboardHeight), minKeyboardHeight);
+    }
 
-        final float maxKeyboardHeight = res.getFraction(
-                R.fraction.config_max_keyboard_height, dm.heightPixels, dm.heightPixels);
+    private static float getMaxKeyboardHeight(final Resources res, final DisplayMetrics dm) {
+        final String maxKeyboardHeightPercent = getDeviceOverrideValue(
+                res, R.array.keyboard_max_height_fractions, null /* defaultValue */);
+        if (!TextUtils.isEmpty(maxKeyboardHeightPercent)) {
+            return dm.heightPixels * Float.parseFloat(maxKeyboardHeightPercent) / 100.0f;
+        }
+        return res.getFraction(R.fraction.config_max_keyboard_height, dm.heightPixels, dm.heightPixels);
+    }
+
+    private static float getMinKeyboardHeight(final Resources res, final DisplayMetrics dm) {
+        final String minKeyboardHeightPercent = getDeviceOverrideValue(
+                res, R.array.keyboard_min_height_fractions, null /* defaultValue */);
+        if (!TextUtils.isEmpty(minKeyboardHeightPercent)) {
+            final float percent = Float.parseFloat(minKeyboardHeightPercent);
+            final float base = percent < 0.0f ? dm.widthPixels : dm.heightPixels;
+            return Math.abs(percent) * base / 100.0f;
+        }
+
         float minKeyboardHeight = res.getFraction(
                 R.fraction.config_min_keyboard_height, dm.heightPixels, dm.heightPixels);
         if (minKeyboardHeight < 0.0f) {
@@ -243,9 +257,7 @@ public final class ResourceUtils {
             minKeyboardHeight = -res.getFraction(
                     R.fraction.config_min_keyboard_height, dm.widthPixels, dm.widthPixels);
         }
-        // Keyboard height will not exceed maxKeyboardHeight and will not be less than
-        // minKeyboardHeight.
-        return (int)Math.max(Math.min(height, maxKeyboardHeight), minKeyboardHeight);
+        return minKeyboardHeight;
     }
 
     public static boolean isValidFraction(final float fraction) {

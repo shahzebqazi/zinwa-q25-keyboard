@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Build condition,max_keyboard_height_percent_of_height -->
+    <string-array name="keyboard_max_height_fractions" translatable="false" />
+
+    <!-- Build condition,min_keyboard_height_percent_of_height_or_negative_width -->
+    <string-array name="keyboard_min_height_fractions" translatable="false">
+        <!-- Keep the portrait keyboard usable on the square Zinwa Q25 display. -->
+        <item>MODEL=Q25,44</item>
+    </string-array>
+</resources>
