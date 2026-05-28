@@ -1,41 +1,69 @@
-# FUTO Keyboard
+<div align="center">
 
-This fork repackages FUTO Keyboard as a `Zinwa Q25`-specific build with a separate Android application ID and square-screen sizing adjustments for the `720x720` Q25 display.
+<p align="center">
+  <img src="docs/assets/hero.svg" alt="zinwa-q25-keyboard" width="100%" />
+</p>
 
-The goal is to make a good modern keyboard that stays offline and doesn't spy on you. This keyboard is a fork of [LatinIME, The Android Open-Source Keyboard](https://android.googlesource.com/platform/packages/inputmethods/LatinIME), with significant changes made to it.
+# zinwa-q25-keyboard
 
-Check out the [FUTO Keyboard website](https://keyboard.futo.org/) for downloads and more information.
+### FUTO Keyboard fork for the Zinwa Q25 — 720×720 communicator, separate app ID
 
-The code is licensed under the [FUTO Source First License 1.1](LICENSE.md).
+[![Android](https://img.shields.io/badge/Android-keyboard-3DDC84.svg)](https://developer.android.com/)
+[![Fork](https://img.shields.io/badge/upstream-FUTO%20Keyboard-89b4fa.svg)](https://github.com/futo-org/android-keyboard/)
 
-## Issue tracking and contributing
+**Device-specific build** of [FUTO Keyboard](https://keyboard.futo.org/) for the **Zinwa Q25** (40% / square 720×720 display): custom application ID, layout sizing, and flash workflow for this hardware class.
 
-Please check the GitHub repository to report issues: [https://github.com/futo-org/android-keyboard/](https://github.com/futo-org/android-keyboard/)
+> **Upstream:** Based on Android Open Source Keyboard / LatinIME lineage. See [FUTO Keyboard](https://keyboard.futo.org/) for project philosophy (offline-first, no telemetry). This fork documents **Q25-specific deltas** only.
 
-The source code is hosted on our [internal GitLab](https://gitlab.futo.org/keyboard/latinime) and mirrored to [GitHub](https://github.com/futo-org/android-keyboard/). As registration is closed on our internal GitLab, we use GitHub instead for issues and pull requests.
+[Build](#build) · [Q25 changes](#q25-specific-changes) · [Upstream](#upstream--license)
 
-Due to custom license, pull requests to this repository require signing a [CLA](https://cla.futo.org/) which you can do after opening a PR. Contributions to the [layouts repo](https://github.com/futo-org/futo-keyboard-layouts) don't require CLA as they're Apache-2.0
+</div>
 
-If you want to help translate the app, please do so via our Pontoon instance: https://i18n-keyboard.futo.org/
+---
 
-## Layouts
+## Q25-specific changes
 
-If you want to contribute layouts, check out the [layouts repo](https://github.com/futo-org/futo-keyboard-layouts).
+| Area | This fork |
+|------|-----------|
+| Target device | Zinwa Q25 — 720×720 square screen |
+| Packaging | Separate Android application ID from stock FUTO |
+| Layout | Sizing adjustments for small square display |
+| Goal | Modern offline keyboard on a communicator-class device |
 
-## Building
+---
 
-When cloning the repository, you must perform a recursive clone to fetch all dependencies:
-```
-git clone --recursive https://gitlab.futo.org/keyboard/latinime.git
-```
+## Build
 
-If you forgot to specify recursive clone, use this to fetch submodules:
-```
+Recursive clone (submodules required):
+
+```bash
+git clone --recursive https://github.com/shahzebqazi/zinwa-q25-keyboard.git
+cd zinwa-q25-keyboard
 git submodule update --init --recursive
 ```
 
-You can then open the project in Android Studio and build it that way, or use gradle commands:
-```
+Android Studio or Gradle:
+
+```bash
 ./gradlew assembleUnstableDebug
 ./gradlew assembleStableRelease
 ```
+
+Flash the appropriate variant to a Q25 (or emulator with matching resolution) per your device docs.
+
+---
+
+## Upstream & license
+
+- Issues / contributions (upstream): [futo-org/android-keyboard](https://github.com/futo-org/android-keyboard/)
+- License: [FUTO Source First License 1.1](LICENSE.md) (upstream); fork inherits upstream terms
+- Translations: [Pontoon](https://i18n-keyboard.futo.org/) (upstream project)
+
+---
+
+## Related
+
+| Resource | URL |
+|----------|-----|
+| Portfolio | [sqazi.sh](https://sqazi.sh) |
+| FUTO layouts repo | [futo-keyboard-layouts](https://github.com/futo-org/futo-keyboard-layouts) |
