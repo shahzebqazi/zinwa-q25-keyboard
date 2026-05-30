@@ -9,4 +9,5 @@ crashreporting.properties
 keystore.properties
 key.jks
 java/res/raw/mozc.data
+java/res/raw/*.gguf
 .cxx
